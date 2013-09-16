@@ -1,0 +1,28 @@
+--- ../rosdep-0.10.14.orig/src/rosdep2/platforms/pip.py	2013-02-20 11:04:36.000000000 +1100
++++ src/rosdep2/platforms/pip.py	2013-03-16 13:32:51.651890938 +1100
+@@ -44,7 +44,7 @@
+ 
+ def is_pip_installed():
+     try:
+-        subprocess.Popen(['pip'], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
++        subprocess.Popen(['python-pip'], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+         return True
+     except OSError:
+         return False
+@@ -57,7 +57,7 @@
+     """
+     if exec_fn is None:
+         exec_fn = read_stdout
+-    pkg_list = exec_fn(['pip', 'freeze']).split('\n')
++    pkg_list = exec_fn(['python-pip', 'freeze']).split('\n')
+ 
+     ret_list = []
+     for pkg in pkg_list:
+@@ -81,5 +81,5 @@
+         if not packages:
+             return []
+         else:
+-            return [['sudo', 'pip', 'install', '-U', p] for p in packages]
++            return [['sudo', 'python-pip', 'install', '-U', p] for p in packages]
+             
+
