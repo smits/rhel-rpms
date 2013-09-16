@@ -1,0 +1,1 @@
+This repository contains all spec files and sources needed to build all ITER RHCS rpms which are not available through existing channels.
