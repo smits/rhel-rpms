@@ -7,6 +7,7 @@ Group:          devel
 License:        BSD
 URL:            www.ros.org
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:        ros-groovy-core.tar.gz
 
 BuildRequires:  python27
 BuildRequires:  python27-devel
@@ -60,22 +61,23 @@ Requires:  python27-dateutil
 ROS (Robot Operating System) provides libraries and tools to help software developers create robot applications. It provides hardware abstraction, device drivers, libraries, visualizers, message-passing, package management, and more. ROS is licensed under an open source, BSD license. This package only contains the Bare Bones: ROS package, build, and communication libraries. No GUI tools.
 
 %prep
-#cleanup previous build
-rm -rf src
-#get rosinstall file
-rosinstall_generator ros_comm --rosdistro groovy --deps --wet-only > groovy-ros_comm-wet.rosinstall
-#get sources
-wstool init -j1 src groovy-ros_comm-wet.rosinstall
+%setup -q -c -n %{name}-%{version}
 #fix shebang lines
-find ./src -type f | xargs sed -i '/^#!/{s/python/python2.7/}'
+find ./src -type f | xargs sed -i '/^#!/{s/python^{[0-9].[0-9]}/python2.7/}'
 
 
 %build
+unset ROS_DISTRO
+unset ROS_PACKAGE_PATH
+unset ROS_ROOT
 src/catkin/bin/catkin_make_isolated --install-space /opt/ros/groovy
 
 %install
+unset ROS_DISTRO
+unset ROS_PACKAGE_PATH
+unset ROS_ROOT
 #cleanup cmakecache
-#find ./build_isolated -type f -name CMakeCache.txt | xargs rm
+find ./build_isolated -type f -name CMakeCache.txt | xargs rm
 DESTDIR=$RPM_BUILD_ROOT src/catkin/bin/catkin_make_isolated --force-cmake --install --install-space /opt/ros/groovy
 #cleanup paths
 #find $RPM_BUILD_ROOT -type f -name *.h -name *.txt -name *.sh -name *.py | xargs sed -i "s|$RPM_BUILD_ROOT||"
@@ -86,7 +88,7 @@ export QA_SKIP_BUILD_ROOT=1
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root,-)
+#%defattr(-,root,root,-)
 %doc
 /opt/ros/groovy/*
 /opt/ros/groovy/.*
