@@ -90,8 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 #%defattr(-,root,root,-)
 %doc
-/opt/ros/groovy/*
-/opt/ros/groovy/.*
+/opt/ros/groovy
 
 %changelog
 * Thu Sep 12 2013 Ruben Smits <ruben@intermodalics.eu> - 1.9.48-1
