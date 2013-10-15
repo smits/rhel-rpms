@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
+%attr(755,root, -) /opt/ros/hydro/bin/typegen 
+%attr(755,root, -) /opt/ros/hydro/bin/orogen
+%attr(755,root, -) /opt/ros/hydro/bin/orogen-unregister 
 /opt/ros/hydro
 
 
