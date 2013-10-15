@@ -1,0 +1,81 @@
+diff -ru ros-hydro-core-1.9.50-orig/src/roscpp/src/libros/param.cpp ros-hydro-core-1.9.50/src/roscpp/src/libros/param.cpp
+--- ros-hydro-core-1.9.50-orig/src/roscpp/src/libros/param.cpp	2013-10-15 11:21:02.000000000 +0200
++++ ros-hydro-core-1.9.50/src/roscpp/src/libros/param.cpp	2013-10-15 13:10:35.962869897 +0200
+@@ -124,32 +124,32 @@
+     xml_vec[i] = vec.at(i);
+   }
+ 
+-  set(key, xml_vec);
++  ros::param::set(key, xml_vec);
+ }
+ 
+ void set(const std::string& key, const std::vector<std::string>& vec)
+ {
+-  setImpl(key, vec);
++  ros::param::setImpl(key, vec);
+ }
+ 
+ void set(const std::string& key, const std::vector<double>& vec)
+ {
+-  setImpl(key, vec);
++  ros::param::setImpl(key, vec);
+ }
+ 
+ void set(const std::string& key, const std::vector<float>& vec)
+ {
+-  setImpl(key, vec);
++  ros::param::setImpl(key, vec);
+ }
+ 
+ void set(const std::string& key, const std::vector<int>& vec)
+ {
+-  setImpl(key, vec);
++  ros::param::setImpl(key, vec);
+ }
+ 
+ void set(const std::string& key, const std::vector<bool>& vec)
+ {
+-  setImpl(key, vec);
++  ros::param::setImpl(key, vec);
+ }
+ 
+ template <class T>
+@@ -165,32 +165,32 @@
+     xml_value[it->first] = it->second;
+   }
+ 
+-  set(key, xml_value);
++  ros::param::set(key, xml_value);
+ }
+ 
+ void set(const std::string& key, const std::map<std::string, std::string>& map)
+ {
+-  setImpl(key, map);
++  ros::param::setImpl(key, map);
+ }
+ 
+ void set(const std::string& key, const std::map<std::string, double>& map)
+ {
+-  setImpl(key, map);
++  ros::param::setImpl(key, map);
+ }
+ 
+ void set(const std::string& key, const std::map<std::string, float>& map)
+ {
+-  setImpl(key, map);
++  ros::param::setImpl(key, map);
+ }
+ 
+ void set(const std::string& key, const std::map<std::string, int>& map)
+ {
+-  setImpl(key, map);
++  ros::param::setImpl(key, map);
+ }
+ 
+ void set(const std::string& key, const std::map<std::string, bool>& map)
+ {
+-  setImpl(key, map);
++  ros::param::setImpl(key, map);
+ }
+ 
+ bool has(const std::string& key)
