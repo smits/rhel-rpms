@@ -20,6 +20,7 @@ Requires:      boost, ncurses, readline, ruby, lua, ros-hydro-core, gccxml
 Provides:      orocos-toolchain = %{version}-%{release} 
 
 %define __find_provides %{nil}
+%define __find_requires %{nil}
 
 %description
 Orocos Toolchain including RTT, OCL, typelib and log4cxx
