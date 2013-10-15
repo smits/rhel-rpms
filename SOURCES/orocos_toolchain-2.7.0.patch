@@ -1,0 +1,34 @@
+diff -ru orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake
+--- orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-14 11:26:43.000000000 +0200
++++ orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-15 15:14:36.689894209 +0200
+@@ -45,10 +45,10 @@
+     #  endif()
+     #  rosbuild_init()
+     #endif()
+-  elseif(EXISTS "${PROJECT_SOURCE_DIR}/package.xml")
+-    if(NOT catkin_FOUND)
+-      find_package(catkin)
+-    endif()
++  #elseif(EXISTS "${PROJECT_SOURCE_DIR}/package.xml")
++    #if(NOT catkin_FOUND)
++      #find_package(catkin)
++    #endif()
+ 
+     if(catkin_FOUND)
+       message(STATUS "[UseOrocos] Building package ${PROJECT_NAME} with catkin develspace support.")
++++ orocos_toolchain-2.7.0/src/orocos_toolchain/rtt_typelib/CMakeLists.txt	2013-10-15 14:52:33.530850915 +0200
+@@ -2,8 +2,6 @@
+ project(rtt_typelib)
+ include(FindPkgConfig)
+ 
+-set(NO_ROS_PACKAGE TRUE)
+-
+ # Source the env.sh script of the Orocos Toolchain in order to find RTT:
+ find_package(OROCOS-RTT)
+ include( ${OROCOS-RTT_USE_FILE} )
+@@ -62,4 +60,5 @@
+ #    ${CMAKE_CURRENT_BINARY_DIR}/rtt-typelib.pc @ONLY)
+ #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rtt-typelib.pc
+ #    DESTINATION lib/pkgconfig)
++set(ORO_USE_CATKIN FALSE)
+ orocos_generate_package(DEPENDS typelib)
