@@ -34,9 +34,11 @@ DESTDIR=%buildroot catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/hydro
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-
 %files
-/opt/ros/hydro
+%define _unpackaged_files_terminate_build 0
+/opt/ros/hydro/lib
+/opt/ros/hydro/share
+/opt/ros/hydro/include
 
 %changelog
 * Tue Oct 15 2013 Ruben Smits <ruben@intemodalics.eu> - 1.10.2-0
