@@ -1,7 +1,7 @@
 Summary: common_msgs contains messages that are widely used by other ROS packages.
 Name: ros-hydro-orocos-kdl
 Version: 1.1.102
-Release: 0%{?dist} 
+Release: 1%{?dist} 
 License: BSD
 Group: Development/Tools 
 URL: http://wiki.ros.org/common_msgs
@@ -11,6 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: ros-hydro-core
 Requires:      ros-hydro-core
+Requires:      eigen3-devel
 Provides:      ros-hydro-orocos-kdl = %{version}-%{release} 
 
 %description
@@ -37,6 +38,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/ros/hydro/include
 
 %changelog
-* Tue Oct 15 2013 Ruben Smits <ruben@intemodalics.eu> - 1.1.102-0
+* Fri Oct 18 2013 Ruben Smits <ruben@intermodalics.eu> - 1.1.102-1
+- added eigen3-devel requirement
+
+* Tue Oct 15 2013 Ruben Smits <ruben@intermodalics.eu> - 1.1.102-0
 - Initial built
 
