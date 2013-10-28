@@ -1,6 +1,6 @@
 Name:           ros-hydro-core
 Version:        1.9.50
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        ROS Bare Bones
 
 Group:          devel
@@ -83,6 +83,8 @@ DESTDIR=$RPM_BUILD_ROOT src/catkin/bin/catkin_make_isolated --force-cmake --inst
 #cleanup paths
 find $RPM_BUILD_ROOT -type f -name '*.hpp' -o -name '*.cmake' -o -name '*.h' -o -name '*.txt' -o -name '*.sh' -o -name '*.py' | xargs sed -i "s|$RPM_BUILD_ROOT||"
 sed -i "s|$RPM_BUILD_ROOT||" $RPM_BUILD_ROOT/opt/ros/hydro/_setup_util.py 
+mkdir -p %buildroot/etc/profile.d
+ln -s /opt/ros/hydro/setup.sh %buildroot/etc/profile.d/ros.sh
 export QA_SKIP_BUILD_ROOT=1
 
 %clean
@@ -92,8 +94,12 @@ rm -rf $RPM_BUILD_ROOT
 #%defattr(-,root,root,-)
 %doc
 /opt/ros/hydro
+/etc/profile.d/ros.sh
 
 %changelog
+* Mon Oct 28 2013 Ruben Smits <ruben@intermodalics.eu> - 1.9.50-2
+- add ros setup to the standard shell setup
+
 * Tue Oct 15 2013 Ruben Smits <ruben@intermodalics.eu> - 1.9.50-1
 - rebuilt
 
