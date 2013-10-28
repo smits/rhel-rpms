@@ -1,34 +1,66 @@
-diff -ru orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake
---- orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-14 11:26:43.000000000 +0200
-+++ orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-15 15:14:36.689894209 +0200
-@@ -45,10 +45,10 @@
-     #  endif()
-     #  rosbuild_init()
-     #endif()
--  elseif(EXISTS "${PROJECT_SOURCE_DIR}/package.xml")
--    if(NOT catkin_FOUND)
--      find_package(catkin)
--    endif()
-+  #elseif(EXISTS "${PROJECT_SOURCE_DIR}/package.xml")
-+    #if(NOT catkin_FOUND)
-+      #find_package(catkin)
-+    #endif()
+diff -u -r orocos_toolchain-2.7.0-orig/src/orocos_toolchain/ocl/config/component_rules.cmake orocos_toolchain-2.7.0/src/orocos_toolchain/ocl/config/component_rules.cmake
+--- orocos_toolchain-2.7.0-orig/src/orocos_toolchain/ocl/config/component_rules.cmake	2013-10-28 14:50:54.884057315 +0100
++++ orocos_toolchain-2.7.0/src/orocos_toolchain/ocl/config/component_rules.cmake	2013-10-28 19:49:07.866067066 +0100
+@@ -217,7 +217,6 @@
+ # Usage: PROGRAM_ADD_DEPS( taskbrowser-test orocos-reporting )
+ MACRO( PROGRAM_ADD_DEPS PROGRAM_NAME )
+   TARGET_LINK_LIBRARIES( ${PROGRAM_NAME} ${ARGN} )
+-  SET_TARGET_PROPERTIES( ${PROGRAM_NAME} PROPERTIES
+-    INSTALL_RPATH_USE_LINK_PATH 1
+-    INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX};${CMAKE_INSTALL_PREFIX}/lib")
++  SET_PROPERTY(TARGET ${PROGRAM_NAME} APPEND
++  	       PROPERTY INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX};${CMAKE_INSTALL_PREFIX}/lib")
+ ENDMACRO( PROGRAM_ADD_DEPS PROGRAM_NAME )
+\ No newline at end of file
+diff -u -r orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake
+--- orocos_toolchain-2.7.0-orig/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-28 14:50:54.802141202 +0100
++++ orocos_toolchain-2.7.0/src/orocos_toolchain/rtt/UseOROCOS-RTT.cmake	2013-10-28 20:10:20.059075865 +0100
+@@ -231,8 +231,8 @@
+       OUTPUT_NAME ${COMPONENT_LIB_NAME}
+       DEFINE_SYMBOL "RTT_COMPONENT"
+       ${LIB_COMPONENT_VERSION}
+-      INSTALL_RPATH_USE_LINK_PATH 1
+-      INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/${PROJECT_NAME};${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
++      #INSTALL_RPATH_USE_LINK_PATH 1
++      INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/plugins;${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/${PROJECT_NAME};${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
+       )
+     if(APPLE)
+       SET_TARGET_PROPERTIES( ${COMPONENT_NAME} PROPERTIES
+@@ -314,7 +314,7 @@
+     SET_TARGET_PROPERTIES( ${LIB_TARGET_NAME} PROPERTIES
+       OUTPUT_NAME ${LIB_NAME}
+       ${LIB_COMPONENT_VERSION}
+-      INSTALL_RPATH_USE_LINK_PATH 1
++      #INSTALL_RPATH_USE_LINK_PATH 1
+       INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
+       )
+     orocos_add_compile_flags( ${LIB_TARGET_NAME} ${USE_OROCOS_COMPILE_FLAGS} )
+@@ -376,8 +376,8 @@
  
-     if(catkin_FOUND)
-       message(STATUS "[UseOrocos] Building package ${PROJECT_NAME} with catkin develspace support.")
-+++ orocos_toolchain-2.7.0/src/orocos_toolchain/rtt_typelib/CMakeLists.txt	2013-10-15 14:52:33.530850915 +0200
-@@ -2,8 +2,6 @@
- project(rtt_typelib)
- include(FindPkgConfig)
- 
--set(NO_ROS_PACKAGE TRUE)
--
- # Source the env.sh script of the Orocos Toolchain in order to find RTT:
- find_package(OROCOS-RTT)
- include( ${OROCOS-RTT_USE_FILE} )
-@@ -62,4 +60,5 @@
- #    ${CMAKE_CURRENT_BINARY_DIR}/rtt-typelib.pc @ONLY)
- #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rtt-typelib.pc
- #    DESTINATION lib/pkgconfig)
-+set(ORO_USE_CATKIN FALSE)
- orocos_generate_package(DEPENDS typelib)
+     SET_TARGET_PROPERTIES( ${EXE_TARGET_NAME} PROPERTIES
+       OUTPUT_NAME ${EXE_NAME}
+-      INSTALL_RPATH_USE_LINK_PATH 1
+-      INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/bin;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
++      #INSTALL_RPATH_USE_LINK_PATH 1
++      INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/plugins;${CMAKE_INSTALL_PREFIX}/bin;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
+       )
+     if(APPLE)
+       SET_TARGET_PROPERTIES( ${EXE_TARGET_NAME} PROPERTIES
+@@ -504,7 +504,7 @@
+     SET_TARGET_PROPERTIES( ${LIB_TARGET_NAME} PROPERTIES
+       OUTPUT_NAME ${LIB_NAME}
+       ${LIB_COMPONENT_VERSION}
+-      INSTALL_RPATH_USE_LINK_PATH 1
++      #INSTALL_RPATH_USE_LINK_PATH 1
+       INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/${PROJECT_NAME}/types;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
+       )
+     if(APPLE)
+@@ -585,7 +585,7 @@
+     SET_TARGET_PROPERTIES( ${LIB_TARGET_NAME} PROPERTIES
+       OUTPUT_NAME ${LIB_NAME}
+       ${LIB_COMPONENT_VERSION}
+-      INSTALL_RPATH_USE_LINK_PATH 1
++      #INSTALL_RPATH_USE_LINK_PATH 1
+       INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/lib/orocos${OROCOS_SUFFIX}/${PROJECT_NAME}/plugins;${CMAKE_INSTALL_PREFIX}/${AC_INSTALL_DIR}"
+       )
+     if(APPLE)
