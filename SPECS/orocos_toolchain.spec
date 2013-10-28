@@ -1,12 +1,12 @@
 Summary: Orocos Toolchain for component-based sofware development
 Name: orocos_toolchain
 Version: 2.7.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL+linking exception
 Group: Development/Tools
 URL: http://www.orocos.org/toolchain
-Source0: orocos_toolchain-2.7.tar.bz2
-Patch0: orocos_toolchain-2.7.0.patch
+Source0: orocos-toolchain-2.7.0.tar.bz2
+#Patch0: orocos_toolchain-2.7.0.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -27,9 +27,9 @@ Orocos Toolchain including RTT, OCL, typelib and log4cxx
 
 %prep
 %setup -q -c
-%patch0 -p1
+#%patch0 -p1
 source /opt/ros/hydro/setup.bash
-wstool init src
+#wstool init src
 
 %build
 #source /opt/ros/hydro/setup.bash
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Oct 28 2013 Ruben Smits <ruben.smits@intermodalics.eu> - 2.7.0-2
+- Updated to use hydro and the latest catkin branch
+
 * Fri Oct 11 2013 Ruben Smits <ruben.smits@intermodalics.eu> - 2.7.0-1
 - Updated to use hydro and the latest catkin branch
 
