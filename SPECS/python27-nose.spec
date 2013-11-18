@@ -48,13 +48,14 @@ python2.7 setup.py build
 
 %install
 python2.7 setup.py install --skip-build --root %{buildroot}
-
+mv %{buildroot}/usr/bin/nosetests %{buildroot}/usr/bin/nosetests2.7
 
 %files
 %doc README.txt 
 /usr/man
 /usr/lib/python2.7/site-packages/%{pypi_name}
 /usr/lib/python2.7/site-packages/%{pypi_name}-%{version}-py?.?.egg-info
+/usr/bin/nosetests2.7
 
 %changelog
 * Thu Sep 12 2013 CODAC Core System Developer - 1.3.0-1
