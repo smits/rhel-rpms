@@ -44,13 +44,13 @@ CFLAGS="$RPM_OPT_FLAGS" python2.7 setup.py build
 %install
 python2.7 setup.py install --skip-build --root %{buildroot}
 # Lets not overwrite the default one in CentOS/RHEL
-rm -f $RPM_BUILD_ROOT/usr/bin/easy_install
+#rm -f $RPM_BUILD_ROOT/usr/bin/easy_install
 
 
 %files
 %doc README.txt
 /usr/lib/python2.7/site-packages/*
-/usr/bin/easy_install-2.7
+#/usr/bin/easy_install-2.7
 /usr/lib/python2.7/site-packages/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
