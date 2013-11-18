@@ -13,7 +13,7 @@ Summary:       Portable access to network interfaces from Python
 
 # Build-time parameters
 BuildRequires: python27-devel
-BuildRequires: python-distribute
+BuildRequires: python27-distribute
 
 BuildRoot:     %{_tmppath}/%{name}-root
 Source:        http://alastairs-place.net/projects/netifaces/%{realname}-%{realver}%{?extraver}.%{srcext}
