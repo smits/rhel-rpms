@@ -10,6 +10,8 @@ Source0:%name.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: ros-hydro-core
+BuildRequires: eigen3
+
 Requires:      ros-hydro-core
 Requires:      eigen3-devel
 Provides:      ros-hydro-orocos-kdl = %{version}-%{release} 
