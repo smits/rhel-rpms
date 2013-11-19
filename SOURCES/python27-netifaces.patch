@@ -1,0 +1,13 @@
+Common subdirectories: netifaces-0.8/build and netifaces-0.8.patched/build
+Common subdirectories: netifaces-0.8/netifaces.egg-info and netifaces-0.8.patched/netifaces.egg-info
+diff -u netifaces-0.8/setup.py netifaces-0.8.patched/setup.py
+--- netifaces-0.8/setup.py	2012-01-31 12:24:29.000000000 +0100
++++ netifaces-0.8.patched/setup.py	2013-11-19 13:38:59.316754189 +0100
+@@ -393,6 +393,7 @@
+ # Don't bother detecting socket ioctls on Windows
+ if not getattr(sys, 'getwindowsversion', None):
+     setuptools.command.build_ext.build_ext = my_build_ext
++    distutils.command.build_ext.build_ext = my_build_ext
+ 
+ setup (name='netifaces',
+        version=__version__,

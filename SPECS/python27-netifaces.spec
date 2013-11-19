@@ -13,10 +13,11 @@ Summary:       Portable access to network interfaces from Python
 
 # Build-time parameters
 BuildRequires: python27-devel
-BuildRequires: python27-distribute
+BuildRequires: python27-setuptools
 
 BuildRoot:     %{_tmppath}/%{name}-root
 Source:        http://alastairs-place.net/projects/netifaces/%{realname}-%{realver}%{?extraver}.%{srcext}
+Patch:         python27-netifaces.patch
 
 %description
 netifaces provides a (hopefully portable-ish) way for Python programmers to
@@ -33,6 +34,7 @@ data provided by the socket options is normally less complete.
 # Preparation step (unpackung and patching if necessary)
 %prep
 %setup -q -n %{realname}-%{realver}%{?extraver}
+%patch -p1
 
 %build
 python2.7 setup.py build
