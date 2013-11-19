@@ -24,13 +24,14 @@ BuildRequires:  python27-netifaces
 BuildRequires:  boost-devel
 BuildRequires:  libstdc++
 BuildRequires:  glibc
-BuildRequires:  tinyxml
+BuildRequires:  tinyxml-devel
 BuildRequires:  bzip2
 BuildRequires:  pkgconfig
-BuildRequires:  gtest
+BuildRequires:  gtest-devel
+BuildRequires:  log4cxx-devel
 BuildRequires:  coreutils
 BuildRequires:  python27-dateutil
-
+BuildRequires:  cmake
 
 Requires:  python27
 Requires:  boost
@@ -47,6 +48,7 @@ Requires:  tinyxml
 Requires:  bzip2
 Requires:  pkgconfig
 Requires:  gtest
+Requires:  log4cxx
 Requires:  boost
 Requires:  coreutils
 Requires:  python27-rosdep
